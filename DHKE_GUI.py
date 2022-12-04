@@ -32,5 +32,3 @@ printButton.pack()
 lbl = tk.Label(frame, text="")
 lbl.pack()
 frame.mainloop()
-
-if __name__ == '__main__':
