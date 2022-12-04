@@ -66,11 +66,3 @@ def primitiveElement(p):
 
     return elementsList
 
-print("Determine Input Parameters")
-inputp = int(input("p: "))
-inputa = int(input("Alice's Private Key: "))
-inputb = int(input("Bob's Private Key: "))
-print()
-
-diffieHellmanKeyExchange(inputp, inputa, inputb)
-#diffieHellmanKeyExchange(97, 31, 54)
