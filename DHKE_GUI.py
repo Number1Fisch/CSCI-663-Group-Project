@@ -1,37 +1,28 @@
-import tkinter as tk
+# import tkinter module
+from tkinter import *
+from tkinter.ttk import *
 
 if __name__ == '__main__':
+    # creating main tkinter window/toplevel
+    master = Tk()
 
-    # Top level window
-    frame = tk.Tk()
-    frame.title("TextBox Input")
+    # this will create a label widget
+    l1 = Label(master, text="First:")
+    l2 = Label(master, text="Second:")
 
+    # grid method to arrange labels in respective
+    # rows and columns as specified
+    l1.grid(row=0, column=0, sticky=W, pady=2)
+    l2.grid(row=1, column=0, sticky=W, pady=2)
 
-    # Function for getting Input
-    # from textbox and printing it
-    # at label widget
+    # entry widgets, used to take entry from user
+    e1 = Entry(master)
+    e2 = Entry(master)
 
-    def printInput():
-        inp = inputTxt.get(1.0, "end-1c")
-        # outputtxt.insert(, inp)
+    # this will arrange entry widgets
+    e1.grid(row=0, column=1, pady=2)
+    e2.grid(row=1, column=1, pady=2)
 
-
-    # Input Textbox Creation
-    inputTxt = tk.Text(frame, height=5, width=20)
-    inputTxt.pack()
-    # Output Textbox Creation
-    outputTxt = tk.Text(frame, height=5, width=20)
-    outputTxt.pack()
-
-
-    # Button Creation
-    printButton = tk.Button(frame,
-                            text="Print",
-                            command=printInput)
-    printButton.pack()
-
-    # Label Creation
-    lbl = tk.Label(frame, text="")
-    lbl.pack()
-    frame.mainloop()
-
+    # infinite loop which can be terminated by keyboard
+    # or mouse interrupt
+    mainloop()
