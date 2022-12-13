@@ -43,12 +43,12 @@ def calculateD(lambdaN, e):
 
 #returns encrypted message as list of values
 
-def encryptMessage(message):
+def encryptMessage(message, e, n):
     encryptedMessage = []
 
     for i in range(len(message)):
         encryptedMessage.append(ord(message[i]))
-        encryptedMessage[i] = pow(encryptedMessage[i], e, n)
+        encryptedMessage[i] = chr(pow(encryptedMessage[i], e, n))
    
 
     return encryptedMessage
@@ -58,7 +58,19 @@ def encryptMessage(message):
 def decryptMessage(encryptedMessage, d, n):
 
     for i in range(len(encryptedMessage)):
-        encryptedMessage[i] = pow(encryptedMessage[i], d, n)
+        encryptedMessage[i] = pow(ord(encryptedMessage[i]), d, n)
         encryptedMessage[i] = chr(encryptedMessage[i])
 
     return encryptedMessage.join("")
+
+
+#message = "Hello World"
+#p = 11
+#q = 13
+#n = p * q
+#lambdaN = computeLambdaN(p, q)
+#e = chooseE(lambdaN)
+#d = calculateD(lambdaN, e)
+#print(message)
+#print(encryptMessage(message,e,n))
+
