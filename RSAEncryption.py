@@ -18,7 +18,7 @@ def isPrime(num):
 
 
 def computeLambdaN(p, q):
-    return int(((p - 1) * (q - 1)) / gcd((p - 1), (q - 1)))
+    return (p - 1) * (q - 1)
 
 # n = p * q, p and q are large primes
 
@@ -26,7 +26,7 @@ def computeLambdaN(p, q):
 
 def computeCompatibleE(lambdaN):
     compatibleE = []
-    for i in range(lambdaN):
+    for i in range(1,lambdaN):
         if gcd(i, lambdaN) == 1:
             compatibleE.append(i)
     return compatibleE
@@ -38,7 +38,7 @@ def chooseE(lambdaN):
 # calculates d(ecrypt), the value which you take the encrypted message to the power of
 
 def calculateD(lambdaN, e):
-    d = egcd(e, lambdaN)[2] % lambdaN
+    d = egcd(e, lambdaN)[1] % lambdaN
     return d
 
 #returns encrypted message as list of values
@@ -48,7 +48,7 @@ def encryptMessage(message, e, n):
 
     for i in range(len(message)):
         encryptedMessage.append(ord(message[i]))
-        encryptedMessage[i] = chr(pow(encryptedMessage[i], e, n))
+        encryptedMessage[i] = pow(encryptedMessage[i], e, n)
    
 
     return encryptedMessage
@@ -58,19 +58,24 @@ def encryptMessage(message, e, n):
 def decryptMessage(encryptedMessage, d, n):
 
     for i in range(len(encryptedMessage)):
-        encryptedMessage[i] = pow(ord(encryptedMessage[i]), d, n)
+        encryptedMessage[i] = pow(encryptedMessage[i], d, n)
+        print(encryptedMessage[i])
         encryptedMessage[i] = chr(encryptedMessage[i])
 
-    return encryptedMessage.join("")
+    return ''.join(encryptedMessage)
 
 
 #message = "Hello World"
-#p = 11
-#q = 13
+#p = 47 # i recommend these values for p and q, they work with this implementation
+#q = 23 
 #n = p * q
 #lambdaN = computeLambdaN(p, q)
-#e = chooseE(lambdaN)
+#e = 3
 #d = calculateD(lambdaN, e)
+#print(d)
 #print(message)
-#print(encryptMessage(message,e,n))
+#encryptedMessage = encryptMessage(message,e,n)
+#print(encryptedMessage)
+#decryptedMessage = decryptMessage(encryptedMessage,d,n)
+#print(decryptedMessage)
 
