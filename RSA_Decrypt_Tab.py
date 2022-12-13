@@ -3,16 +3,25 @@ import tkinter
 from tkinter import *
 from tkinter.ttk import *
 
-if __name__ == '__main__':
+import RSAEncryption
 
+
+
+
+
+if __name__ == '__main__':
+    def create_Ciphertext(n, e, plaintext, ciphertext):
+        RSAEncryption.encrypt(n, e, plaintext)
     # creates window
     root = Tk()
     root.title("RSA Encryption")
     root.geometry("200x100")
     root.grid(5, 2, 1, 1)
+
     # variables for encryption values
-    pubKey = (0, 0)
-    privateKey = 0
+    n = tkinter.IntVar
+    e = tkinter.IntVar
+    d = tkinter.IntVar
     plainText = ""
     cipherText = ""
 
@@ -23,25 +32,28 @@ if __name__ == '__main__':
     CipherTextLabel = Label(root, text="Cipher Text")
 
     # text boxes
-    PubKeyBox = Entry(root, textvariable=pubKey, width=4)
-    PubKeyBox.insert(INSERT, "(n, e)")
-    PrivateKeyBox = Entry(root, textvariable=privateKey, width=4)
+    NBox = Entry(root, textvariable=n, width=4)
+    NBox.insert(INSERT, "n")
+    EBox = Entry(root, textvariable=e, width=4)
+    EBox.insert(INSERT, "e")
+    PrivateKeyBox = Entry(root, textvariable=d, width=4)
     PrivateKeyBox.insert(INSERT, "d")
     PlainTextBox = Text(root, width=40, height=10)
     CipherTextBox = Text(root, width=40, height=10)
 
     # buttons
-    EncryptButton = Button(root, text="Encrypt")
-    DecryptButton = Button(root, text="Decrypt")
+    EncryptButton = Button(root, text="Encrypt", command=RSAEncryption.encrypt(n, e, plainText))
+    DecryptButton = Button(root, text="Decrypt", command=RSAEncryption.decrypt(n, d, cipherText))
 
     # construct grid for elements
 
     CipherTextLabel.grid(row=0, column=0, sticky=N)
-    CipherTextBox.grid(row=1, column=0, rowspan=5, sticky=NSEW)
+    CipherTextBox.grid(row=1, column=0, rowspan=5, padx=5, sticky=NSEW)
     CipherTextBox.insert(INSERT, cipherText)
 
     PubKeyLabel.grid(row=0, column=1, ipadx=5, sticky=N)
-    PubKeyBox.grid(row=1, column=1, ipadx=5, sticky=N)
+    NBox.grid(row=1, column=1, ipadx=1, sticky=NW)
+    EBox.grid(row=1, column=1, ipadx=1, sticky=NE)
     EncryptButton.grid(row=2, column=1, sticky=N)
 
     PrivateKeyLabel.grid(row=3, column=1)
@@ -49,7 +61,7 @@ if __name__ == '__main__':
     DecryptButton.grid(row=5, column=1)
 
     PlainTextLabel.grid(row=0, column=2, sticky=N)
-    PlainTextBox.grid(row=1, column=2, rowspan=5, sticky=NSEW)
+    PlainTextBox.grid(row=1, column=2, rowspan=5, padx=5, sticky=NSEW)
     PlainTextBox.insert(INSERT, plainText)
 
     # add weight so application fills window size
@@ -61,6 +73,6 @@ if __name__ == '__main__':
     root.rowconfigure(5, weight=2)
 
     root.columnconfigure(0, weight=4)
-    root.columnconfigure(1, weight=2)
+    root.columnconfigure(1, weight=1)
     root.columnconfigure(2, weight=4)
     root.mainloop()

@@ -1,28 +1,60 @@
-# import tkinter module
 from tkinter import *
 from tkinter.ttk import *
 
 if __name__ == '__main__':
-    # creating main tkinter window/toplevel
-    master = Tk()
+    # create window
+    frame = Tk()
+    frame.title("DHKE")
+    frame.geometry('100x100')
+    frame.grid(6, 2, 1, 1)
 
-    # this will create a label widget
-    l1 = Label(master, text="First:")
-    l2 = Label(master, text="Second:")
+    # variables for key values
+    p = 0
+    a = 0
+    B = 0
+    commonKey = 0
 
-    # grid method to arrange labels in respective
-    # rows and columns as specified
-    l1.grid(row=0, column=0, sticky=W, pady=2)
-    l2.grid(row=1, column=0, sticky=W, pady=2)
+    # labels
+    PrimeLabel = Label(frame, text="Prime Number: ")
+    AlphaLabel = Label(frame, text="Alpha: ")
+    BLabel = Label(frame, text="Receiver/Sender value (A/B): ")
+    CommonKeyLabel = Label(frame, text="Common Key: ")
 
-    # entry widgets, used to take entry from user
-    e1 = Entry(master)
-    e2 = Entry(master)
+    # text boxes
+    PrimeBox = Entry(frame, textvariable=p)
+    AlphaBox = Entry(frame, textvariable=a)
+    BBox = Entry(frame, textvariable=B)
+    CommonKeyBox = Entry(frame)
+    # buttons
+    BButton = Button(frame, text="Calculate B")
+    CommonButton = Button(frame, text="Calculate Common Key")
 
-    # this will arrange entry widgets
-    e1.grid(row=0, column=1, pady=2)
-    e2.grid(row=1, column=1, pady=2)
+    # construct grid for elements
+    PrimeLabel.grid(row=0, column=0, sticky=E)
+    PrimeBox.grid(row=0, column=1, sticky=W)
 
-    # infinite loop which can be terminated by keyboard
-    # or mouse interrupt
-    mainloop()
+    AlphaLabel.grid(row=1, column=0, sticky=E)
+    AlphaBox.grid(row=1, column=1, sticky=W)
+
+    BButton.grid(row=2, column=0, columnspan=2, sticky=N,)
+
+    BLabel.grid(row=3, column=0, sticky=E)
+    BBox.grid(row=3, column=1, sticky=W)
+
+    CommonButton.grid(row=4, column=0, columnspan=2, sticky=N)
+
+    CommonKeyLabel.grid(row=5, column=0, sticky=E)
+    CommonKeyBox.grid(row=5, column=1, sticky=W)
+
+    # add weight so application fills window size
+    frame.rowconfigure(0, weight=1)
+    frame.rowconfigure(1, weight=1)
+    frame.rowconfigure(2, weight=2)
+    frame.rowconfigure(3, weight=1)
+    frame.rowconfigure(4, weight=2)
+    frame.rowconfigure(5, weight=2)
+    frame.rowconfigure(5, weight=2)
+
+    frame.columnconfigure(0, weight=1)
+    frame.columnconfigure(1, weight=1)
+    frame.mainloop()
